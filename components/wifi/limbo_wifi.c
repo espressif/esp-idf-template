@@ -1,8 +1,16 @@
-
+// ESP components
 #include "esp_wifi.h"
+#include "esp_event.h"
+#include "esp_event_loop.h"
 
+// Limbo components
 #include "limbo_wifi.h"
 #include "skynet.h"
+
+esp_err_t event_handler(void *ctx, system_event_t *event)
+{
+  return ESP_OK;
+}
 
 void limbo_wifi_init(void)
 {
