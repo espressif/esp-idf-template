@@ -1,11 +1,12 @@
-// ESP components
 #include "esp_wifi.h"
 #include "esp_event.h"
 #include "esp_event_loop.h"
+#include "esp_log.h"
 
-// Limbo components
 #include "limbo_wifi.h"
 #include "skynet.h"
+
+static const char* TAG = "limbo_wifi";
 
 esp_err_t event_handler(void *ctx, system_event_t *event)
 {
@@ -30,4 +31,6 @@ void limbo_wifi_init(void)
   ESP_ERROR_CHECK( esp_wifi_set_config(WIFI_IF_STA, &sta_config) );
   ESP_ERROR_CHECK( esp_wifi_start() );
   ESP_ERROR_CHECK( esp_wifi_connect() );
+
+  ESP_LOGI(TAG, "Completed wifi init");
 }

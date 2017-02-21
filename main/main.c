@@ -1,10 +1,9 @@
-// ESP components
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+
 #include "esp_system.h"
 #include "nvs_flash.h"
 
-// Limbo components
 #include "heartbeat.h"
 #include "limbo_wifi.h"
 
