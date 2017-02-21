@@ -3,7 +3,7 @@
 #include "driver/gpio.h"
 
 #define HEARTBEAT_GPIO GPIO_NUM_5
-#define HEARTBEAT_PERIOD_MS 250
+#define HEARTBEAT_PERIOD_MS 1000
 
 void heartbeat_task(void *pvParameter)
 {
