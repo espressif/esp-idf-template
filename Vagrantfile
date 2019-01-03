@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
   #   # Customize the amount of memory on the VM:
   #   vb.memory = "1024"
     # Enable USB
-    vb.customize ["modifyvm", :id, "--usb", "on"]
+    vb.customize ['modifyvm', :id, '--usb', 'on']
     # Please use your esp device id, run `VBoxManage.exe list usbhost` list devices
     vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'ESP', '--vendorid', '0x1a86', '--productid', '0x7523']
     # Disable log
@@ -45,6 +45,6 @@ Vagrant.configure("2") do |config|
   SHELL
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
     python -m pip install -q --user -r /opt/local/espressif/esp-idf/requirements.txt
-    grep -q "IDF_PATH" /home/vagrant/.profile || echo "export IDF_PATH=\"/opt/local/espressif/esp-idf\"\nexport PATH="/opt/local/espressif/xtensa-esp32-elf/bin:${PATH}"\ncd /vagrant" >> /home/vagrant/.profile
+    grep -q 'IDF_PATH' /home/vagrant/.profile || echo "export IDF_PATH=\"/opt/local/espressif/esp-idf\"\nexport PATH=\"/opt/local/espressif/xtensa-esp32-elf/bin:${PATH}\"\ncd /vagrant" >> /home/vagrant/.profile
   SHELL
 end
