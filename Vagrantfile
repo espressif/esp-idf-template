@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
     # Enable USB
     vb.customize ['modifyvm', :id, '--usb', 'on']
     # Please use your esp device id, run `VBoxManage.exe list usbhost` list devices
-    vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'ESP', '--vendorid', '0x1a86', '--productid', '0x7523']
+    vb.customize ['usbfilter', 'add', '0', '--target', :id, '--name', 'ESP', '--vendorid', '0x10C4', '--productid', '0xEA60']
     # Disable log
     vb.customize ['modifyvm', :id, '--uartmode1', 'disconnected']
   end
@@ -29,6 +29,7 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     apt-get -qq update && apt-get -qq upgrade -y
+    apt-get -qq install -y linux-image-extra-virtual
     apt-get -qq install -y gcc git wget make libncurses-dev flex bison gperf python python-pip python-setuptools python-serial python-cryptography python-future python-pyparsing
     if [ ! -d /opt/local/espressif/ ]; then
       mkdir -p /opt/local/espressif/
@@ -42,6 +43,7 @@ Vagrant.configure("2") do |config|
       cd /opt/local/espressif/esp-idf && git pull -q && git submodule --quiet update --init --recursive
     fi
     chown -R vagrant: /opt/local/espressif/
+    usermod -a -G dialout vagrant
   SHELL
   config.vm.provision 'shell', privileged: false, inline: <<-SHELL
     python -m pip install -q --user -r /opt/local/espressif/esp-idf/requirements.txt
