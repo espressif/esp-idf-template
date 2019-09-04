@@ -8,6 +8,18 @@
 #include "nvs_flash.h"
 #include "driver/gpio.h"
 
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 1, 0)
+//
+// From IDF 4.1.0 ESP-NETIF approach is encouraged and all network
+//  interfaces have to be explicitely created
+//
+#define TCPIP_INIT()    esp_netif_init()
+#define CREATE_WIFI_STATION()    assert(esp_netif_create_default_wifi_sta())
+#else
+#define TCPIP_INIT()    tcpip_adapter_init()
+#define CREATE_WIFI_STATION()
+#endif
+
 #if ESP_IDF_VERSION_MAJOR >= 4
 
 static void wifi_event_handler(void* arg, esp_event_base_t event_base,
@@ -32,7 +44,7 @@ esp_err_t event_handler(void *ctx, system_event_t *event)
 void app_main(void)
 {
     nvs_flash_init();
-    tcpip_adapter_init();
+    TCPIP_INIT();
 
 #if ESP_IDF_VERSION_MAJOR >= 4
     ESP_ERROR_CHECK(esp_event_loop_create_default());
@@ -41,6 +53,7 @@ void app_main(void)
 #else
     ESP_ERROR_CHECK( esp_event_loop_init(event_handler, NULL) );
 #endif
+    CREATE_WIFI_STATION();
 
     wifi_init_config_t cfg = WIFI_INIT_CONFIG_DEFAULT();
     ESP_ERROR_CHECK( esp_wifi_init(&cfg) );
