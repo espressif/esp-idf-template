@@ -3,7 +3,7 @@
 #include "freertos/task.h"
 
 
-void app_main()
+void app_main(void)
 {
     int i = 0;
     while (1) {
