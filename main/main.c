@@ -3,10 +3,12 @@
 #include "freertos/task.h"
 #include "nvs_flash.h"
 #include "esp_log.h"
+#include "mqtt.h"
 
 static const char *TAG = "main";
 
 void wifi_init_sta(void);
+
 
 void app_main(void)
 {
@@ -26,4 +28,6 @@ void app_main(void)
 
     ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
     wifi_init_sta();
+    mqtt_start();
+
 }

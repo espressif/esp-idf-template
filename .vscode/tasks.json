@@ -16,6 +16,20 @@
             "problemMatcher": []
         },
         {
+            "label": "Full Build",
+            "type": "shell",
+            "command": "idf.py fullclean build",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "Flash",
             "type": "shell",
             "command": "idf.py flash",
