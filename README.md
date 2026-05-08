@@ -1,7 +1,9 @@
 ESP-IDF template app
 ====================
 
-This is a template application to be used with [Espressif IoT Development Framework](https://github.com/espressif/esp-idf).
+This project is no longer being maintained.
+
+ESP-IDF now supports creating a new project from the command line using `idf.py create-project`. See [idf.py docs](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/tools/idf-py.html#start-a-new-project-create-project) for more information.
 
 Please check [ESP-IDF docs](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/index.html) for getting started instructions.
 
